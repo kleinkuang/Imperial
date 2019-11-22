@@ -1,9 +1,9 @@
-// File:    L_uart.h
+// File:    L_ffy.h
 // Author:  Lei Kuang
-// Date:    2019.11.11
+// Date:    2019.11.18
 // @ Imperial College London
 
-// UART Drivers for Lacewing Project
+// Application Drivers for FFY
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f3xx_hal.h"
@@ -12,14 +12,10 @@
 #define FFY_END_FLAG        0xFFFF
 
 /* Exported functions prototypes ---------------------------------------------*/
-HAL_StatusTypeDef   L_UART_Init         (void);
-
-void                BL_RxCpltCallback   (UART_HandleTypeDef *);
-void                PC_RxCpltCallback   (UART_HandleTypeDef *);
+HAL_StatusTypeDef FFY_Transmit      (uint8_t*, uint16_t);
+HAL_StatusTypeDef FFY_Send_Data     (uint16_t);
+HAL_StatusTypeDef FFY_Send_Char     (char);
 
 /* Exported variables --------------------------------------------------------*/
-extern UART_HandleTypeDef   huart4;
-extern UART_HandleTypeDef   huart2;
-
-extern uint8_t  rx2Buffer[6];
-extern uint8_t  rx4Buffer[1];
+extern uint8_t  bl_cmd_avail;
+extern uint32_t bl_cmd;

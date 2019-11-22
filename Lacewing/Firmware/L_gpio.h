@@ -14,10 +14,14 @@
 #define LD2_Pin             GPIO_PIN_7  //GPIO_PIN_5
 #define LD2_GPIO_Port       GPIOC       //GPIOA
 
+#define READY_Pin           GPIO_PIN_8
+#define READY_Port          GPIOC
+
 /* Exported functions prototypes ---------------------------------------------*/
 void            L_GPIO_Init (void);
-void            set_led     (GPIO_PinState);
-void            toggle_led  (void);
-GPIO_PinState   get_button  (void);
+void            Set_LED     (GPIO_PinState);
+void            Toggle_LED  (void);
+GPIO_PinState   Get_Button  (void);
+GPIO_PinState   Chip_Ready  (void);
 
 /* Exported variables --------------------------------------------------------*/
