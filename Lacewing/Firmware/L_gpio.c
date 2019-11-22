@@ -11,36 +11,38 @@
 #include "L_gpio.h"
 
 /* Private function prototypes -----------------------------------------------*/
-static void MX_GPIO_Init(void);
-    
+void MX_GPIO_Init(void);
+
 /* Exported function implementations -----------------------------------------*/
+
 void L_GPIO_Init()
 {
     MX_GPIO_Init();
 }
 
-GPIO_PinState get_button()
+GPIO_PinState Chip_Ready()
+{
+    return HAL_GPIO_ReadPin(READY_Port, READY_Pin);
+}
+
+GPIO_PinState Get_button()
 {
     return HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin);
 }
 
-void set_led(GPIO_PinState pinState)
+void Set_LED(GPIO_PinState pinState)
 {
     HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, pinState);
 }
 
-void toggle_led()
+void Toggle_LED()
 {
     HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
 }
 
 /* Private function implementations ------------------------------------------*/
-/**
-  * @brief GPIO Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_GPIO_Init(void)
+
+void MX_GPIO_Init(void)
 {
     GPIO_InitTypeDef GPIO_InitStruct = {0};
 
@@ -65,4 +67,11 @@ static void MX_GPIO_Init(void)
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     HAL_GPIO_Init(LD2_GPIO_Port, &GPIO_InitStruct);
+    
+    // Configure READY pin
+    GPIO_InitStruct.Pin   = READY_Pin;
+    GPIO_InitStruct.Mode  = GPIO_MODE_INPUT;
+    GPIO_InitStruct.Pull  = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    HAL_GPIO_Init(READY_Port, &GPIO_InitStruct);
 }
