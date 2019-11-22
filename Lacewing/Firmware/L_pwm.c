@@ -40,7 +40,9 @@ float                   pwmDutyCycle = 0;
 float                   pwmFrequency = 0;
 
 // User Parameters
-uint32_t period = 127; // PWM Out Period
+//uint32_t period = 127; // 128MHz / 128 -> 1MHz
+//uint32_t period = 511; // 128MHz / 512 -> 500KHz
+uint32_t period = 1023; // 128MHz / 1024 -> 125KHz
 
 /* Private function prototypes -----------------------------------------------*/
 HAL_StatusTypeDef TIM3_Init         (void);
