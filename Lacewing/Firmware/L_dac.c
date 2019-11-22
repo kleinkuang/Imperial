@@ -4,6 +4,7 @@
 // @ Imperial College London
 
 // DAC Drivers
+// - 12-bit
 
 /* Includes ------------------------------------------------------------------*/
 #include "L_dac.h"
@@ -18,7 +19,6 @@ uint32_t dac1Buffer;
 
 /* Private function prototypes -----------------------------------------------*/
 void L_DAC_DMA_Init (void);
-
 
 /* Exported function implementations -----------------------------------------*/
 
