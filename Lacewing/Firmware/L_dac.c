@@ -45,10 +45,10 @@ HAL_StatusTypeDef L_DAC_Init()
 
 HAL_StatusTypeDef L_DAC_SetValue(uint16_t channel, uint16_t value)
 {
-    if (HAL_DAC_SetValue(&dac1Handle, channel==0 ? DAC_CHANNEL_1 : DAC_CHANNEL_2, DAC_ALIGN_12B_R, value)!= HAL_OK)
+    if (HAL_DAC_SetValue(&dac1Handle, channel==1 ? DAC_CHANNEL_1 : DAC_CHANNEL_2, DAC_ALIGN_12B_R, value)!= HAL_OK)
         return HAL_ERROR;
 
-    if (HAL_DAC_Start(&dac1Handle, channel==0 ? DAC_CHANNEL_1 : DAC_CHANNEL_2)!= HAL_OK)
+    if (HAL_DAC_Start(&dac1Handle, channel==1 ? DAC_CHANNEL_1 : DAC_CHANNEL_2)!= HAL_OK)
         return HAL_ERROR;
     
     return HAL_OK;
@@ -56,7 +56,7 @@ HAL_StatusTypeDef L_DAC_SetValue(uint16_t channel, uint16_t value)
 
 HAL_StatusTypeDef L_DAC_Stop(uint16_t channel)
 {
-    if (HAL_DAC_Stop(&dac1Handle, channel==0 ? DAC_CHANNEL_1 : DAC_CHANNEL_2)!= HAL_OK)
+    if (HAL_DAC_Stop(&dac1Handle, channel==1 ? DAC_CHANNEL_1 : DAC_CHANNEL_2)!= HAL_OK)
         return HAL_ERROR;
 
     return HAL_OK;
@@ -64,7 +64,7 @@ HAL_StatusTypeDef L_DAC_Stop(uint16_t channel)
 
 uint32_t L_DAC_GetValue (uint16_t channel)
 {
-    return HAL_DAC_GetValue(&dac1Handle, channel==0 ? DAC_CHANNEL_1 : DAC_CHANNEL_2);
+    return HAL_DAC_GetValue(&dac1Handle, channel==1 ? DAC_CHANNEL_1 : DAC_CHANNEL_2);
 }
 
 /* Private function implementations ------------------------------------------*/

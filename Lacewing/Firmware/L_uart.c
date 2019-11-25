@@ -19,16 +19,13 @@ UART_HandleTypeDef  huart2;
 DMA_HandleTypeDef   hdma_uart4_rx;
 DMA_HandleTypeDef   hdma_usart2_rx;
 
-uint8_t     rx2Buffer[6];
-uint8_t     rx4Buffer[1];
+uint8_t             rx2Buffer[6];
+uint8_t             rx4Buffer[1];
 
 /* Private function prototypes -----------------------------------------------*/
 void                L_UART_DMA_Init     (void);
 HAL_StatusTypeDef   MX_UART4_Init       (void);
 HAL_StatusTypeDef   MX_USART2_UART_Init (void);
-
-void                decode_pc_cmd       (uint8_t *);
-void                decode_bl_cmd       (uint8_t *);
 
 /* Exported function implementations -----------------------------------------*/
 
@@ -60,7 +57,6 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
     if(huart->Instance==UART4)
     {
         BL_RxCpltCallback(huart);
-        
     }
 }
 

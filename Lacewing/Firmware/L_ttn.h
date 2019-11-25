@@ -28,6 +28,7 @@ HAL_StatusTypeDef   TTN_Set_Peltier             (uint16_t);
 
 uint32_t            TTN_Write_Pixel_RAM         (uint16_t);
 uint32_t            TTN_Read_Pixel_RAM          (void);
+HAL_StatusTypeDef   TTN_Clear_Pixel_RAM         (void);
 uint32_t            TTN_Read_Pixel_RAM_with_Vs  (uint16_t);
 
 /* Exported advanced function implementations --------------------------------*/

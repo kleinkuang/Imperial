@@ -6,9 +6,9 @@
 // SPI Drivers for interfacing with TTN
 // - MSB first
 
-
 /* Includes ------------------------------------------------------------------*/
 #include "L_spi.h"
+#include "main.h"
 
 /* Private variables ---------------------------------------------------------*/
 SPI_HandleTypeDef spi2Handle;
@@ -27,9 +27,23 @@ HAL_StatusTypeDef L_SPI_Init(void)
     spi2Handle.Init.CLKPolarity       = SPI_POLARITY_HIGH;          // Failing Edge !!!
     spi2Handle.Init.CLKPhase          = SPI_PHASE_1EDGE;
     spi2Handle.Init.NSS               = SPI_NSS_HARD_OUTPUT;
-    //spi2Handle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_16;   // 32MHz / 16 -> 2MHz
-    //spi2Handle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_64;   // 32MHz / 64 -> 500KHz
-    spi2Handle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_128;   // 32MHz / 128 -> 250KHz
+    #if SPI_CLK_FREQ == 16000000
+    spi2Handle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;    // 32MHz/2 = 16Mhz
+    #elif SPI_CLK_FREQ == 8000000
+    spi2Handle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_4;    // 32MHz/4 = 8Mhz
+    #elif SPI_CLK_FREQ == 4000000
+    spi2Handle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_8;    // 32MHz/8 = 4Mhz
+    #elif SPI_CLK_FREQ == 2000000
+    spi2Handle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_16;   // 32MHz/16 = 2Mhz
+    #elif SPI_CLK_FREQ == 1000000
+    spi2Handle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_32;   // 32MHz/32 = 1Mhz
+    #elif SPI_CLK_FREQ == 500000
+    spi2Handle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_64;   // 32MHz/64 = 500KHz
+    #elif SPI_CLK_FREQ == 250000
+    spi2Handle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_128;  // 32MHz/128 = 250KHz
+    #else
+    spi2Handle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_256;  // 32MHz/256 = 125KHz
+    #endif
     spi2Handle.Init.FirstBit          = SPI_FIRSTBIT_MSB;
     spi2Handle.Init.TIMode            = SPI_TIMODE_DISABLE;
     spi2Handle.Init.CRCCalculation    = SPI_CRCCALCULATION_DISABLE;

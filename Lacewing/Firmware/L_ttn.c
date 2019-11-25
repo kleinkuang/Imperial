@@ -24,9 +24,10 @@
 #define TEMP_D              150     // D Controller
 
 /* Private variables ---------------------------------------------------------*/
-uint32_t    temp_dac        = 0;        // Actuator
-uint32_t    temp_ref        = 0;        // Setpoint
-uint32_t    temp_err_new    = 0;        // Error
+
+uint32_t    temp_dac        = 0;    // Actuator
+uint32_t    temp_ref        = 0;    // Setpoint
+uint32_t    temp_err_new    = 0;    // Error
 uint32_t    temp_err_sum    = 0;
 uint32_t    temp_err_old    = 0;
 
@@ -37,11 +38,11 @@ static  uint32_t    TTN_SPI_Transfer        (uint16_t);
 /* Private function implementations ------------------------------------------*/
 
 // According to the PWM output period which defines the TTN clock frequency
-// Approximately delay a number of TTN clock cycles
+// Approximately delay a number of TTN clock cycles (not accurate)
 static void TTN_Delay_Clock(uint32_t n)
 {
     uint32_t period = L_PWM_Out_Get_Period() >> 3;
-    
+
     // Loop for counting microsecond
     for(int i=0; i<n; i++)
     {
@@ -51,12 +52,13 @@ static void TTN_Delay_Clock(uint32_t n)
     }
 }
 
+// TTN SPI Transfer with waiting for ready signal
 static uint32_t TTN_SPI_Transfer (uint16_t data)
 {
     // Check if TTN is ready
     TTN_Delay_Clock(10);
     while(Chip_Ready()==GPIO_PIN_RESET);
-    
+
     uint32_t spi_out;
     spi_out = L_SPI_Transfer(data);
 
@@ -90,7 +92,7 @@ HAL_StatusTypeDef TTN_Reset()
 {
     if(L_SPI_Transfer(0x2000)==0xFFFFFFFF)
         return HAL_ERROR;
-    HAL_Delay(200);
+    HAL_Delay(100);
 
     return HAL_OK;
 }
@@ -99,7 +101,7 @@ HAL_StatusTypeDef TTN_Reset()
 // - row: 0:77
 // - col: 0:55
 HAL_StatusTypeDef TTN_Set_Pixel_Row(uint16_t row)
-{
+{ 
     // Set pixel row
     if(TTN_SPI_Transfer(0xC000 | row << 4)==0xFFFFFFFF)
         return HAL_ERROR;
@@ -112,7 +114,7 @@ HAL_StatusTypeDef TTN_Set_Pixel_Col(uint16_t col)
     // Set pixel column
     if(TTN_SPI_Transfer(0xC800 | col << 5)==0xFFFFFFFF)
         return HAL_ERROR;
-    
+
     return HAL_OK;
 }
 
@@ -124,7 +126,7 @@ HAL_StatusTypeDef TTN_Set_Pixel_RC(uint16_t row, uint16_t col)
 
     if(TTN_Set_Pixel_Col(col)!=HAL_OK)
         return HAL_ERROR;
-    
+
     return HAL_OK;
 }
 
@@ -135,6 +137,23 @@ uint32_t TTN_Write_Pixel_RAM(uint16_t value)
     uint32_t temp = TTN_SPI_Transfer(0xDC00 | value);
     
     return temp;
+}
+
+HAL_StatusTypeDef TTN_Clear_Pixel_RAM()
+{
+    // Traverse on every ISFET pixel
+    for(int col=0; col<COL_WIDTH; col++)
+    {
+        TTN_Set_Pixel_Col(col);
+        for(int row=0; row<ROW_WIDTH; row++)
+        {
+            TTN_Set_Pixel_Row(row);
+
+            if(TTN_Write_Pixel_RAM(0x00)==0xFFFFFFFF)
+                return HAL_ERROR;
+        }
+    }
+    return HAL_OK;
 }
 
 // Read from pixel RAM
@@ -149,7 +168,7 @@ uint32_t TTN_Read_Pixel_RAM()
     if(TTN_SPI_Transfer(0xD800)==0xFFFFFFFF)
         return 0xFFFFFFFF;
 
-    // Write 0 to RAM
+    // Void cmd
     if(TTN_SPI_Transfer(0x00)==0xFFFFFFFF)
         return 0xFFFFFFFF;
 
@@ -164,10 +183,15 @@ uint32_t TTN_Read_Pixel_RAM_with_Vs(uint16_t value)
     // Write Vs    
     if(TTN_SPI_Transfer(0xD000 | value)==0xFFFFFFFF)
         return 0xFFFFFFFF;
-    TTN_Delay_Clock(50);
+    //HAL_Delay(1);
+    //TTN_Delay_Clock(20);
     
     // Write 0 to RAM
-    if(TTN_Write_Pixel_RAM(0x00)==0xFFFFFFFF)
+    /*if(TTN_Write_Pixel_RAM(0x00)==0xFFFFFFFF)
+        return 0xFFFFFFFF;*/
+    
+    // Void cmd
+    if(TTN_SPI_Transfer(0x00)==0xFFFFFFFF)
         return 0xFFFFFFFF;
 
     // Read    
@@ -177,13 +201,13 @@ uint32_t TTN_Read_Pixel_RAM_with_Vs(uint16_t value)
 HAL_StatusTypeDef TTN_Set_Vref(uint16_t vdac)
 {
     // 10-bit vdac -> 12-bit DAC
-    return L_DAC_SetValue(0, vdac<<2);
+    return L_DAC_SetValue(1, vdac<<2);
 }
 
 HAL_StatusTypeDef TTN_Set_Peltier(uint16_t vdac)
 {
     // 10-bit vdac -> 12-bit DAC
-    return L_DAC_SetValue(1, vdac<<2);
+    return L_DAC_SetValue(2, vdac<<2);
 }
 
 /* Exported advanced function implementations --------------------------------*/
@@ -206,9 +230,9 @@ uint32_t TTN_SweepSearch_Vs(uint32_t target)
 
 uint32_t TTN_BinarySearch_Vs(uint32_t target)
 {
-    uint32_t    min = 0;
-    uint32_t    max = 1023;
-    uint32_t    cnt = 0;
+    uint32_t    min  = 0;
+    uint32_t    max  = 1023;
+    uint32_t    cnt  = 0;
     uint32_t    data = 0;
 
     for(int i=0; i<11; i++)
@@ -292,7 +316,7 @@ uint32_t TTN_BinarySearch_Vref()
         // vref - step
         //TTN_Set_Vref(vref-step);
         cnt = TTN_Count_Active_Pixels();
-        
+
         //printf("%5d%5d%5d\n", cnt_ref, cnt, vref-step);
         
         if(cnt>cnt_ref)

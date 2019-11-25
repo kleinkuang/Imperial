@@ -40,7 +40,8 @@ uint16_t    par2 = 0x00;
 #endif /* __GNUC__ */
 
 /* Exported function implementations -----------------------------------------*/
-    
+
+// Cooperate with the Python GUI for debug
 void PC_Command_Service()
 {
     uint32_t    temp_u;

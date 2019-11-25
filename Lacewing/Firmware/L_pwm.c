@@ -21,16 +21,17 @@
 // - !!! DutyCycle measurement only works when PWM freq <=16MHz
 
 /* Includes ------------------------------------------------------------------*/
+#include "main.h"
 #include "L_pwm.h"
 
 #define TIM34CLK 128U //MHz
 
 /* Private variables ---------------------------------------------------------*/
 TIM_HandleTypeDef       tim3Handle;     // Timer handler declaration
-TIM_OC_InitTypeDef      sConfigOC;      // Timer Output Compare Configuration Structure declaration
+TIM_OC_InitTypeDef      sConfigOC;      // Timer output compare configuration structure declaration
 
 TIM_HandleTypeDef       tim4Handle;     // Timer handler declaration
-TIM_IC_InitTypeDef      sConfigIC;      // Timer Output Compare Configuration Structure declaration
+TIM_IC_InitTypeDef      sConfigIC;      // Timer input capture configuration structure declaration
 TIM_SlaveConfigTypeDef  sSlaveConfig;   // Slave configuration structure
 
 uint32_t                pwmSampleCnt = 0;
@@ -40,9 +41,7 @@ float                   pwmDutyCycle = 0;
 float                   pwmFrequency = 0;
 
 // User Parameters
-//uint32_t period = 127; // 128MHz / 128 -> 1MHz
-//uint32_t period = 511; // 128MHz / 512 -> 500KHz
-uint32_t period = 1023; // 128MHz / 1024 -> 125KHz
+uint32_t period = TIM34CLK*1000000 / TTN_CLK_FREQ - 1;
 
 /* Private function prototypes -----------------------------------------------*/
 HAL_StatusTypeDef TIM3_Init         (void);

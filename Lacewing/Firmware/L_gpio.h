@@ -9,13 +9,6 @@
 #include "stm32f3xx_hal.h"
 
 /* Private defines -----------------------------------------------------------*/
-#define B1_Pin              GPIO_PIN_13
-#define B1_GPIO_Port        GPIOC
-#define LD2_Pin             GPIO_PIN_7  //GPIO_PIN_5
-#define LD2_GPIO_Port       GPIOC       //GPIOA
-
-#define READY_Pin           GPIO_PIN_8
-#define READY_Port          GPIOC
 
 /* Exported functions prototypes ---------------------------------------------*/
 void            L_GPIO_Init (void);
