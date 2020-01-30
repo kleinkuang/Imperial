@@ -1,14 +1,14 @@
 20191203
-			Basic version, ready for modification
+            Basic version, ready for modification
 			
 20191203_A
-			Modified version
-			- Remove Hardware Flow Control Pins CTS/RTS from USART
-			- Connect TTN_ready to PA8
-			- Move IREF_ADC pin to PA0
-			- Move I2C bus from PB6/PB7 to PB8/PB9
-			- Move TTN_CLK pin to PB6
-			- Connect TTN_PWM to PB7
+            Modified version
+            - Remove Hardware Flow Control Pins CTS/RTS from USART
+            - Connect TTN_ready to PA8
+            - Move IREF_ADC pin to PA0
+            - Move I2C bus from PB6/PB7 to PB8/PB9
+            - Move TTN_CLK pin to PB6
+            - Connect TTN_PWM to PB7
 20200109
             Add TLC2272 Dual OPAMP tp pre-amplify 3.3v to 5v
             Redo the layout on analogue components
