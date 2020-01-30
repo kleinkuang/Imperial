@@ -1,0 +1,12 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : Project [LacewingPXE_v3p1.PrjPcb]
+   Generated File[LacewingPXE_v3p1.TXT]
+   Generated File[LacewingPXE_v3p1.LDP]
+   Generated File[LacewingPXE_v3p1.DRR]
+
+
+Files Generated   : 3
+Documents Printed : 0
+
+Finished Output Generation At 3:48:45 PM On 1/30/2020

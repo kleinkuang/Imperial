@@ -1,0 +1,20 @@
+Change component parameters: Designator = "C16" ("C16"); Footprint = "CAPC0805(2012)75_N"; UniqueID = "\BYAZFRFU" ("\BYAZFRFU")
+Change component parameters (AddParameter): Name = "Farnell Order Code"; Value = "2320829"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer"; Value = "MULTICOMP"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Part No"; Value = "MC0805B225K250CT"; VariantName = "[No Variations]"
+Change component parameters: Designator = "CSD1" ("CSD1"); Footprint = "CSD16327"; UniqueID = "\IKQEMOYG" ("\IKQEMOYG")
+Change component parameters (AddParameter): Name = "Farnell Order Code"; Value = "3009654"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer"; Value = "TEXAS INSTRUMENTS"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Part No"; Value = "CSD17575Q3T"; VariantName = "[No Variations]"
+Change component parameters: Designator = "CSD2" ("CSD2"); Footprint = "CSD16327"; UniqueID = "\GLKWLHWF" ("\GLKWLHWF")
+Change component parameters (AddParameter): Name = "Farnell Order Code"; Value = "3009654"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer"; Value = "TEXAS INSTRUMENTS"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Part No"; Value = "CSD17575Q3T"; VariantName = "[No Variations]"
+Change component parameters: Designator = "RN1" ("RN1"); Footprint = "RN41"; UniqueID = "\TAYTGYPG" ("\TAYTGYPG")
+Change component parameters (AddParameter): Name = "Farnell Order Code"; Value = "2143311"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer"; Value = "MICROCHIP"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Part No"; Value = "RN41-I/RM"; VariantName = "[No Variations]"
+Change component parameters: Designator = "USB1" ("USB1"); Footprint = "HIRO-ZX62R-B-5P_V"; UniqueID = "\WCBTWOFR" ("\WCBTWOFR")
+Change component parameters (AddParameter): Name = "Farnell Order Code"; Value = "2554983"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer"; Value = "HIROSE"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Part No"; Value = "ZX62R-B-5P(30)"; VariantName = "[No Variations]"

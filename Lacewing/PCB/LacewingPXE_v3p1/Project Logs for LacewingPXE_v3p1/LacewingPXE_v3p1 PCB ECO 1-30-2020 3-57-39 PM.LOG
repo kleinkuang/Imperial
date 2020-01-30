@@ -1,0 +1,13 @@
+Change Component DesignItemId : Designator=BQ1 Old DesignItemId= New DesignItemId=BQ27750DRZT
+Change component parameters: Designator = "R39" ("R39"); Footprint = "RESC1005X40X25NL05T05"; UniqueID = "\YJIIDAYU" ("\YJIIDAYU")
+Change component parameters (AddParameter): Name = "Farnell Order Code"; Value = "1469669"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer"; Value = "VISHAY"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Part No"; Value = "CRCW040210K0FKED"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R40" ("R40"); Footprint = "RESC1005X40X25NL05T05"; UniqueID = "\AAHZKDEP" ("\AAHZKDEP")
+Change component parameters (AddParameter): Name = "Farnell Order Code"; Value = "1469669"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer"; Value = "VISHAY"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Part No"; Value = "CRCW040210K0FKED"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R41" ("R41"); Footprint = "RESC1005X40X25NL05T05"; UniqueID = "\QXSZKLRK" ("\QXSZKLRK")
+Change component parameters (AddParameter): Name = "Farnell Order Code"; Value = "1469669"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer"; Value = "VISHAY"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Part No"; Value = "CRCW040210K0FKED"; VariantName = "[No Variations]"
